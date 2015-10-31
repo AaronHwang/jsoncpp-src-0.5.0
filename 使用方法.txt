@@ -1,0 +1,28 @@
+1、下载工具
+JsonCpp
+http://sourceforge.net/projects/jsoncpp/files/
+scons
+http://sourceforge.net/projects/scons/files/scons/2.1.0/scons-2.1.0.tar.gz
+说明：
+① 安装JsonCpp需要下载JsonCpp和Scon还需要机器上有python(Mac内置安装了Python)
+② scons又是一个牛叉的工具，功能和GNU make一样，又比make简单多了。scons是python工具，需要先安装好python。
+
+2、先安装scons
+① 解压缩
+
+② 设置环境变量
+使用终端进入scons目录，执行以下命令安装scons
+sudo python setup.py install
+
+③ 切换到jsoncpp的解压目录，执行命令：
+python $MYSCONS/script/scons platform=linux-gcc
+或者python scons platform=linux-gcc
+
+④ 生成静态和动态库文件
+在jsoncpp-src-0.5.0/libs/linux-gcc-4.2.1目录下生成以下两个文件
+libjson_linux-gcc-4.2.1_libmt.a
+libjson_linux-gcc-4.2.1_libmt.dylib
+
+⑤ 把libjson_linux-gcc-4.2.1_libmt.a和包含各个头文件的文件夹json添加到Xcode工程中，使用Xcode成功；
+后者拷贝son头文件文件夹和libjson_linux-gcc-4.2.1_libmt.a到程序代码的路径，使用命令行进行编译，为方便起见可以重命名libjson_linux-gcc-4.2.1_libmt.a为libjson.a，然后使用以下命令：
+g++ test.cpp -L./-ljson
